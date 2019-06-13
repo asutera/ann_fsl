@@ -3,17 +3,14 @@ import os
 import sys
 root = os.getcwd()
 sys.path.append(os.getcwd())
-sys.path.append(os.getcwd()+"/../SelectiveModels")
-sys.path.append(os.getcwd()+"/../Models")
 
-from scripts.helpers.dream_reader import dream_data
-from scripts.helpers.artificial_data_generator import generate_regression_nl, generate_regression_l, generate_classification_l, generate_classification_nl
-from scripts.helpers.aupr import get_aupr
+from helpers.artificial_data_generator import generate_regression_nl, generate_regression_l, generate_classification_l, generate_classification_nl
+from helpers.aupr import get_aupr
 import pickle
 import numpy as np
 
-for n_features in [50,2500,10000]:
-    for nbr in range(5,10):
+for n_features in [5000]:
+    for nbr in range(0,5):
         for t in ["regression", "classification"]:
             for t_ in ["l", "nl"]:
 

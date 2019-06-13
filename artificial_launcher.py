@@ -4,12 +4,9 @@ os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 import sys
 root = os.getcwd()
 sys.path.append(os.getcwd())
-sys.path.append(os.getcwd()+"/../SelectiveModels")
-sys.path.append(os.getcwd()+"/../Models")
 
-from scripts.helpers.dream_reader import dream_data
-from scripts.helpers.artificial_data_generator import generate_regression_nl, generate_regression_l, generate_classification_l, generate_classification_nl
-from scripts.helpers.aupr import get_aupr
+from helpers.artificial_data_generator import generate_regression_nl, generate_regression_l, generate_classification_l, generate_classification_nl
+from helpers.aupr import get_aupr
 import numpy as np
 from FSNET import FSNET
 import argparse
@@ -39,8 +36,8 @@ for t in ["regression", "classification"]:
     else:
         outdim = 2
     for t_ in ["nl", "l"]:
-        for nbr in range(5,10):
-            d = pickle.load(open("Datasets/" + str(t) + "_" + str(t_) + "_" + str(nbr),"rb"))
+        for nbr in range(5):
+            d = pickle.load(open("Datasets/" + str(t) + "_" + str(t_) + "_" + str(n_features) + "_" + str(nbr),"rb"))
             datas, answers, useful_features = d['datas'], d['answers'], d['useful_features']
             train_dataset = {'inputs': [np.reshape(el, [1, -1]) for el in datas[:train_samples]],
                              'outputs': [np.reshape(el, [1, -1]) for el in answers[:train_samples]]}
@@ -53,8 +50,8 @@ for t in ["regression", "classification"]:
                 else:
                     regul_possible = ["none"]
                 for regul_type in regul_possible:
-                    alphas = [10.0, 100.0, 1000.0]
-                    alphas_2 = [0.0]
+                    alphas = [0.0, 10.0, 100.0, 1000.0]
+                    alphas_2 = [0.0, 10000.0, 100000.0, 1000000.0]
                     if regul_type == "l2" or regul_type == "none":
                         alphas = [0.0]
                     if regul_type == "l1" or regul_type == "none":
