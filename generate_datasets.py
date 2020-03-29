@@ -9,6 +9,9 @@ from helpers.aupr import get_aupr
 import pickle
 import numpy as np
 
+if not os.path.exists('Datasets/'):
+    os.mkdir('Datasets/')
+
 for n_features in [5000]:
     for nbr in range(0,5):
         for t in ["regression", "classification"]:
