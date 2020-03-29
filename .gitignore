@@ -1,0 +1,5 @@
+saved_results/*
+ArtificialResults/*
+Datasets/*
+*.pyc
+.DS_STORE
