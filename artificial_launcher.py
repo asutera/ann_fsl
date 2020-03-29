@@ -28,6 +28,8 @@ load =False
 n_features = 5000
 train_samples = 2000
 
+if not os.path.exists('ArtificialResults/'):
+	os.mkdir('ArtificialResults/')
 
 layers_sizes = [300, 150, 75]
 for t in ["regression", "classification"]:
